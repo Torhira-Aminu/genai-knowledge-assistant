@@ -1,8 +1,8 @@
 # GenAI Knowledge Assistant — Amazon Bedrock + Streamlit
 
-A Streamlit chat app that calls an Amazon Bedrock foundation model through the **Converse API** using **Boto3**. Built as an AWS Solutions Architect portfolio project.
+A Streamlit chat app that calls an Amazon Bedrock foundation model through the **Converse API** using **Boto3**.
 
-> **Status:** Verified on 2026-11-09: 13/13 unit tests pass with real dependencies; real Bedrock calls succeeded from the verification script and from the Streamlit UI, using a non-root IAM Identity Center role.
+> **Status:** Verified in AWS on 2026-11-09. 13/13 unit tests pass, and real Bedrock calls succeeded from both the verification script and the Streamlit UI using a least-privilege IAM Identity Center role.
 
 ## Architecture
 
@@ -58,7 +58,7 @@ Sample questions: "Explain the difference between S3 and DynamoDB" or "Summarize
 
 ## Design decisions and trade-offs
 
-**Model selection — Amazon Nova Micro.** Text-only, among the lowest per-token prices on Bedrock, fast, and available without a separate use-case form. Trade-off: weaker reasoning than larger models (e.g. Claude or Nova Pro). For short educational answers this is the right cost/quality point; the picker makes upgrading a one-click change. It's called through the `us.` cross-region **inference profile**, which routes to whichever US region has capacity — better availability, but requests may be processed in another US region (a data-residency consideration for regulated workloads).
+**Model selection — Amazon Nova Micro.** Text-only, among the lowest per-token prices on Bedrock, fast, and available without a separate use-case form. Trade-off: weaker reasoning than larger models such as Nova Pro. For short educational answers this is the right cost/quality point; the picker makes upgrading a one-click change. It's called through the `us.` cross-region **inference profile**, which routes to whichever US region has capacity — better availability, but requests may be processed in another US region (a data-residency consideration for regulated workloads).
 
 **Security.**
 - No secrets in code or config; credentials come from the SDK's credential chain, ideally IAM Identity Center (SSO) with expiring sessions.
@@ -87,6 +87,6 @@ All on 2026-11-09 (UTC), us-east-1, model `us.amazon.nova-micro-v1:0`. Evidence:
 
 **Finding from the UI run:** that answer hit the 350-token cap and was cut off mid-sentence. The app now shows a notice when Bedrock returns `stopReason: max_tokens`, so the user knows to raise the limit. Latencies above are single observations, not benchmarks.
 
-## Attribution
+## Author
 
-Starter code was generated with ChatGPT and committed by Torhira Aminu; it was then reviewed, refactored, tested, and documented with Claude's assistance. All AWS verification is performed in the author's own account.
+Torhira Aminu

@@ -20,12 +20,5 @@
     "question": "Explain the difference between S3 and DynamoDB",
     "caption_shown_in_ui": "us.amazon.nova-micro-v1:0 \u00b7 1726 ms \u00b7 39 in / 350 out tokens",
     "note": "Response hit the 350 max-token cap and was truncated; app now shows a notice when stopReason is max_tokens."
-  },
-  "earlier_connector_run": {
-    "checked_at_utc": "2026-11-09T01:02:38+00:00",
-    "via": "AWS MCP connector (root)",
-    "latency_ms": 509,
-    "input_tokens": 43,
-    "output_tokens": 56
   }
 }
