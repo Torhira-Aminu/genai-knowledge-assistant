@@ -1,0 +1,24 @@
+{
+  "checked_at_utc": "2026-11-09T01:56:57+00:00",
+  "region": "us-east-1",
+  "model_id": "us.amazon.nova-micro-v1:0",
+  "account": "********5180",
+  "principal_type": "assumed-role (IAM Identity Center, PortfolioDeveloper permission set; not root)",
+  "run_from": "scripts/check_bedrock.py on the author's Windows machine with real boto3/botocore",
+  "selected_model_is_inference_profile": true,
+  "invocation": {
+    "ok": true,
+    "prompt": "In two sentences, explain what Amazon S3 is used for.",
+    "response": "Amazon S3 (Simple Storage Service) is used for storing and retrieving large amounts of data securely in the cloud, suitable for a wide range of applications including data backup, archiving, and as a part of big data analytics workflows. It provides scalable storage with high availability and durability.",
+    "latency_ms": 491,
+    "input_tokens": 43,
+    "output_tokens": 57,
+    "stop_reason": "end_turn"
+  },
+  "streamlit_ui_run": {
+    "screenshot": "docs/screenshots/streamlit-response.png",
+    "question": "Explain the difference between S3 and DynamoDB",
+    "caption_shown_in_ui": "us.amazon.nova-micro-v1:0 \u00b7 1726 ms \u00b7 39 in / 350 out tokens",
+    "note": "Response hit the 350 max-token cap and was truncated; app now shows a notice when stopReason is max_tokens."
+  }
+}
