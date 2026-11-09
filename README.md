@@ -2,7 +2,7 @@
 
 A Streamlit chat app that calls an Amazon Bedrock foundation model through the **Converse API** using **Boto3**. Built as an AWS Solutions Architect portfolio project.
 
-> **Status:** Code and unit tests complete. One real Bedrock invocation verified on 2026-11-09 (see below). The Streamlit UI itself has not yet been run against AWS, so there is no UI screenshot yet.
+> **Status:** Verified on 2026-11-09: 13/13 unit tests pass with real dependencies; real Bedrock calls succeeded from the verification script and from the Streamlit UI, using a non-root IAM Identity Center role.
 
 ## Architecture
 
@@ -73,18 +73,19 @@ Sample questions: "Explain the difference between S3 and DynamoDB" or "Summarize
 
 ## Verified results
 
-**Real invocation, 2026-11-09 (UTC), us-east-1.** Evidence: [`docs/evidence/bedrock_check.json`](docs/evidence/bedrock_check.json)
+All on 2026-11-09 (UTC), us-east-1, model `us.amazon.nova-micro-v1:0`. Evidence: [`docs/evidence/bedrock_check.json`](docs/evidence/bedrock_check.json)
 
-| Item | Result |
+| Check | Result |
 |---|---|
-| Model | `us.amazon.nova-micro-v1:0` (Amazon Nova Micro, US cross-region inference profile) |
-| Model availability | Nova Micro ACTIVE for on-demand and inference-profile use in us-east-1 |
-| Request | Converse API, same system prompt and settings as `bedrock_client.py` (maxTokens 350, temperature 0.3, topP 0.9) |
-| Outcome | `stopReason: end_turn`, 43 input / 56 output tokens |
-| Latency | 509 ms (as reported by Bedrock's `metrics.latencyMs`; single call, not a benchmark) |
-| Cost of this call | ≈ $0.00001 at Nova Micro list prices |
+| Unit tests (Windows, real boto3/botocore) | 13 / 13 pass |
+| Identity used | IAM Identity Center role with the `PortfolioDeveloper` permission set (not root) |
+| Model availability | Nova Micro active; `us.` inference profile present in us-east-1 |
+| `scripts/check_bedrock.py` | Success: 43 input / 57 output tokens, 491 ms reported by Bedrock, `stopReason: end_turn` |
+| Streamlit UI | Real answer to "Explain the difference between S3 and DynamoDB": 1,726 ms, 39 input / 350 output tokens |
 
-How it was run: through the AWS MCP connector, not the Streamlit app. Still to do: run `streamlit run app.py` locally and add a cropped screenshot to `docs/screenshots/`.
+![Streamlit app answering with Amazon Nova Micro](docs/screenshots/streamlit-response.png)
+
+**Finding from the UI run:** that answer hit the 350-token cap and was cut off mid-sentence. The app now shows a notice when Bedrock returns `stopReason: max_tokens`, so the user knows to raise the limit. Latencies above are single observations, not benchmarks.
 
 ## Attribution
 

@@ -1,21 +1,31 @@
 {
-  "checked_at_utc": "2026-11-09T01:02:38+00:00",
+  "checked_at_utc": "2026-11-09T01:56:57+00:00",
   "region": "us-east-1",
   "model_id": "us.amazon.nova-micro-v1:0",
-  "account": "********(redacted)",
-  "invocation_path": "Bedrock Runtime Converse API called through the AWS MCP connector with the same request shape as bedrock_client.py (system prompt, maxTokens=350, temperature=0.3, topP=0.9). Not yet run from the Streamlit UI.",
-  "account_checks": {
-    "nova_micro_on_demand_and_inference_profile": "ACTIVE",
-    "us.amazon.nova-micro-v1:0_profile_present": true,
-    "text_models_listed_in_region": 97
-  },
+  "account": "********5180",
+  "principal_type": "assumed-role (IAM Identity Center, PortfolioDeveloper permission set; not root)",
+  "run_from": "scripts/check_bedrock.py on the author's Windows machine with real boto3/botocore",
+  "selected_model_is_inference_profile": true,
   "invocation": {
     "ok": true,
     "prompt": "In two sentences, explain what Amazon S3 is used for.",
-    "response": "Amazon S3 (Simple Storage Service) is used for storing and retrieving large amounts of data securely in the cloud, ideal for backup, archiving, and as a foundation for big data analytics and web applications. It's designed to provide high durability, availability, and scalability.",
-    "stop_reason": "end_turn",
+    "response": "Amazon S3 (Simple Storage Service) is used for storing and retrieving large amounts of data securely in the cloud, suitable for a wide range of applications including data backup, archiving, and as a part of big data analytics workflows. It provides scalable storage with high availability and durability.",
+    "latency_ms": 491,
     "input_tokens": 43,
-    "output_tokens": 56,
-    "bedrock_reported_latency_ms": 509
+    "output_tokens": 57,
+    "stop_reason": "end_turn"
+  },
+  "streamlit_ui_run": {
+    "screenshot": "docs/screenshots/streamlit-response.png",
+    "question": "Explain the difference between S3 and DynamoDB",
+    "caption_shown_in_ui": "us.amazon.nova-micro-v1:0 \u00b7 1726 ms \u00b7 39 in / 350 out tokens",
+    "note": "Response hit the 350 max-token cap and was truncated; app now shows a notice when stopReason is max_tokens."
+  },
+  "earlier_connector_run": {
+    "checked_at_utc": "2026-11-09T01:02:38+00:00",
+    "via": "AWS MCP connector (root)",
+    "latency_ms": 509,
+    "input_tokens": 43,
+    "output_tokens": 56
   }
 }

@@ -72,6 +72,9 @@ if prompt:
         failed = False
         meta = (f"{result.model_id} · {result.latency_ms} ms · "
                 f"{result.input_tokens} in / {result.output_tokens} out tokens")
+        if result.stop_reason == "max_tokens":
+            answer += ("\n\n_⚠️ Answer cut off at the max-token limit. "
+                       "Raise “Max response tokens” in the sidebar for a longer answer._")
         log.info("Bedrock OK model=%s latency_ms=%s", result.model_id, result.latency_ms)
     except BedrockInvocationError as exc:
         log.warning("Bedrock call failed code=%s", exc.code)
