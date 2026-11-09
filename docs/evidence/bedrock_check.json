@@ -1,0 +1,21 @@
+{
+  "checked_at_utc": "2026-11-09T01:02:38+00:00",
+  "region": "us-east-1",
+  "model_id": "us.amazon.nova-micro-v1:0",
+  "account": "********(redacted)",
+  "invocation_path": "Bedrock Runtime Converse API called through the AWS MCP connector with the same request shape as bedrock_client.py (system prompt, maxTokens=350, temperature=0.3, topP=0.9). Not yet run from the Streamlit UI.",
+  "account_checks": {
+    "nova_micro_on_demand_and_inference_profile": "ACTIVE",
+    "us.amazon.nova-micro-v1:0_profile_present": true,
+    "text_models_listed_in_region": 97
+  },
+  "invocation": {
+    "ok": true,
+    "prompt": "In two sentences, explain what Amazon S3 is used for.",
+    "response": "Amazon S3 (Simple Storage Service) is used for storing and retrieving large amounts of data securely in the cloud, ideal for backup, archiving, and as a foundation for big data analytics and web applications. It's designed to provide high durability, availability, and scalability.",
+    "stop_reason": "end_turn",
+    "input_tokens": 43,
+    "output_tokens": 56,
+    "bedrock_reported_latency_ms": 509
+  }
+}

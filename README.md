@@ -2,7 +2,7 @@
 
 A Streamlit chat app that calls an Amazon Bedrock foundation model through the **Converse API** using **Boto3**. Built as an AWS Solutions Architect portfolio project.
 
-> **Status:** Code and unit tests are complete. A real Bedrock invocation has **not yet been recorded** in this repository. The "Verified results" section below is filled in only from `docs/evidence/bedrock_check.json` produced by an actual run.
+> **Status:** Code and unit tests complete. One real Bedrock invocation verified on 2026-11-09 (see below). The Streamlit UI itself has not yet been run against AWS, so there is no UI screenshot yet.
 
 ## Architecture
 
@@ -73,7 +73,18 @@ Sample questions: "Explain the difference between S3 and DynamoDB" or "Summarize
 
 ## Verified results
 
-_Pending — no real invocation recorded yet._ After running `scripts/check_bedrock.py`, this section should list the date, region, model ID, latency, and token counts copied from `docs/evidence/bedrock_check.json`, plus a screenshot at `docs/screenshots/streamlit-response.png` (crop out account IDs and profile names).
+**Real invocation, 2026-11-09 (UTC), us-east-1.** Evidence: [`docs/evidence/bedrock_check.json`](docs/evidence/bedrock_check.json)
+
+| Item | Result |
+|---|---|
+| Model | `us.amazon.nova-micro-v1:0` (Amazon Nova Micro, US cross-region inference profile) |
+| Model availability | Nova Micro ACTIVE for on-demand and inference-profile use in us-east-1 |
+| Request | Converse API, same system prompt and settings as `bedrock_client.py` (maxTokens 350, temperature 0.3, topP 0.9) |
+| Outcome | `stopReason: end_turn`, 43 input / 56 output tokens |
+| Latency | 509 ms (as reported by Bedrock's `metrics.latencyMs`; single call, not a benchmark) |
+| Cost of this call | ≈ $0.00001 at Nova Micro list prices |
+
+How it was run: through the AWS MCP connector, not the Streamlit app. Still to do: run `streamlit run app.py` locally and add a cropped screenshot to `docs/screenshots/`.
 
 ## Attribution
 
